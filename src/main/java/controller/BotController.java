@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import domain.Product;
 import repositories.ProductRepository;
-import services.ProductService;
 
 @RestController
 public class BotController {
@@ -37,10 +36,11 @@ public class BotController {
 		JSONObject jsonResult = new JSONObject(map);
 		JSONObject rsl = jsonResult.getJSONObject("result");
 		JSONObject param = rsl.getJSONObject("parameters");
-		String city = param.getString("city");
-
+		String city = param.getString("shipping-zone");
+		
+	
 		System.out.println("**********Result***************");
-		System.out.println("********param**city**************" + city);
+		System.out.println("********param**shipping-zone**************" + city);
 		System.out.println("************* ******************");
 		Map<String, Object> json = new HashMap<String, Object>();
 		Product prodSearch = new Product();
