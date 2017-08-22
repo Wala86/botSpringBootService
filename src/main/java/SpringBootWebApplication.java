@@ -8,15 +8,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import domain.Product;
-import groovyjarjarcommonscli.CommandLine;
 import repositories.ProductRepository;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "controller" })
 @EntityScan(basePackages = { "domain" })
-@EnableJpaRepositories
+@EnableJpaRepositories (basePackages = { "repositories" })
 @EnableConfigurationProperties
-
+@ComponentScan
 public class SpringBootWebApplication implements CommandLineRunner {
 	@Autowired
 	ProductRepository rep;
@@ -29,7 +28,7 @@ public class SpringBootWebApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		Product prod = new Product();
-		
+		prod.setId(1);
 		prod.setDescription("prod1");
 		prod.setPrice(500);
 		rep.save(prod);
