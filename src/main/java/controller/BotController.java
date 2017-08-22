@@ -39,10 +39,14 @@ public class BotController {
 		this.productService.saveProduct(prod);
 		Product prodSearch = new Product();
 		prodSearch = this.productService.getProductById(1);
-		*/
+		
 		json.put("speech", " The cost of product is:" + prodSearch.getPrice());
 		json.put("displayText", " The cost of product is:" + prodSearch.getPrice());
-
+		json.put("source", "apiai-onlinestore-shipping");
+		*/
+		
+		json.put("speech", " The cost of product is:"));
+		json.put("displayText", " The cost of product is:");
 		json.put("source", "apiai-onlinestore-shipping");
 		System.out.println("************* ******************" + obj.get("result"));
 		return json;
