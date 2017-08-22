@@ -36,9 +36,11 @@ public class BotController {
 		System.out.println("**********webhook/***************");
 		JSONObject jsonResult = new JSONObject(map);
 		JSONObject rsl = jsonResult.getJSONObject("result");
-		String param = rsl.getString("parameters");
+		JSONObject param = rsl.getJSONObject("parameters");
+		String city = param.getString("city");
+
 		System.out.println("**********Result***************");
-		System.out.println("********param****************" + param);
+		System.out.println("********param**city**************" + city);
 		System.out.println("************* ******************");
 		Map<String, Object> json = new HashMap<String, Object>();
 		Product prodSearch = new Product();
