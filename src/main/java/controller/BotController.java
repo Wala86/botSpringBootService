@@ -31,7 +31,7 @@ public class BotController {
 	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> obj) throws JSONException {
 		System.out.println("**********webhook/***************");
 		Map<String, Object> json = new HashMap<String, Object>();
-/*
+
 		Product prod = new Product();
 		prod.setId(1);
 		prod.setDescription("prod1");
@@ -43,11 +43,9 @@ public class BotController {
 		json.put("speech", " The cost of product is:" + prodSearch.getPrice());
 		json.put("displayText", " The cost of product is:" + prodSearch.getPrice());
 		json.put("source", "apiai-onlinestore-shipping");
-		*/
 		
-		json.put("speech", " The cost of product is:"));
-		json.put("displayText", " The cost of product is:");
-		json.put("source", "apiai-onlinestore-shipping");
+		
+		
 		System.out.println("************* ******************" + obj.get("result"));
 		return json;
 
