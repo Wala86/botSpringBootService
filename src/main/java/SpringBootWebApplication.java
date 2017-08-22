@@ -15,7 +15,6 @@ import repositories.ProductRepository;
 @EntityScan(basePackages = { "domain" })
 @EnableJpaRepositories (basePackages = { "repositories" })
 @EnableConfigurationProperties
-@ComponentScan
 public class SpringBootWebApplication implements CommandLineRunner {
 	@Autowired
 	ProductRepository rep;
