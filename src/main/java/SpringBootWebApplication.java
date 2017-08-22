@@ -29,7 +29,7 @@ public class SpringBootWebApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		Product prod = new Product();
-		prod.setId(1);
+		
 		prod.setDescription("prod1");
 		prod.setPrice(500);
 		rep.save(prod);
