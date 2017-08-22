@@ -1,7 +1,14 @@
 package repositories;
 
 import domain.Product;
-import org.springframework.data.repository.CrudRepository;
 
-public interface ProductRepository extends CrudRepository<Product, Integer>{
+import java.io.Serializable;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RepositoryRestResource
+public interface ProductRepository extends JpaRepository<Product, Serializable> {
 }
