@@ -15,7 +15,7 @@ public class Product {
     private String productId;
     private String description;
     private String imageUrl;
-    private BigDecimal price;
+    private int price;
 
     public String getDescription() {
         return description;
@@ -57,11 +57,11 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }
