@@ -1,11 +1,9 @@
 package controller;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import domain.Product;
-import net.minidev.json.parser.JSONParser;
 import repositories.ProductRepository;
 import services.ProductService;
 
 @RestController
 public class BotController {
 
-	private ProductService productService;
 	@Autowired
 	ProductRepository rep;
 
