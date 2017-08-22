@@ -1,10 +1,13 @@
 package controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import domain.Product;
+import net.minidev.json.parser.JSONParser;
 import repositories.ProductRepository;
 import services.ProductService;
 
@@ -32,8 +36,14 @@ public class BotController {
 	}
 
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
-	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> obj) throws JSONException {
+	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> map) throws JSONException {
 		System.out.println("**********webhook/***************");
+		JSONObject jsonResult = new JSONObject(map);
+		JSONObject rsl = jsonResult.getJSONObject("result");
+		String param = rsl.getString("parameters");
+		System.out.println("**********Result***************");
+		System.out.println("********param****************" + param);
+		System.out.println("************* ******************");
 		Map<String, Object> json = new HashMap<String, Object>();
 		Product prodSearch = new Product();
 		prodSearch = rep.findOne(1);
@@ -42,8 +52,10 @@ public class BotController {
 		json.put("displayText", " The cost of product is:" + prodSearch.getPrice());
 
 		json.put("source", "apiai-onlinestore-shipping");
-		System.out.println("************* ******************" + obj.get("result"));
+		System.out.println("************* ******************" + map.get("result"));
+
 		return json;
 
 	}
+
 }
