@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import domain.Product;
+import repositories.ProductRepository;
 import services.ProductService;
 
 @RestController
 public class BotController {
 
 	private ProductService productService;
+	@Autowired
+	ProductRepository rep;
 
 	@RequestMapping("/resource")
 	public Map<String, Object> home() {
@@ -31,9 +35,9 @@ public class BotController {
 	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> obj) throws JSONException {
 		System.out.println("**********webhook/***************");
 		Map<String, Object> json = new HashMap<String, Object>();
-	
 		Product prodSearch = new Product();
-		prodSearch = this.productService.getProductById(1);
+		prodSearch = rep.findOne(1);
+
 		json.put("speech", " The cost of product is:" + prodSearch.getPrice());
 		json.put("displayText", " The cost of product is:" + prodSearch.getPrice());
 
