@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ProductController {
-
+/*
     private ProductService productService;
 
     @Autowired
@@ -51,5 +51,5 @@ public class ProductController {
 
         return "redirect:/product/" + product.getId();
     }
-
+*/
 }
