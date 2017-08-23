@@ -32,7 +32,11 @@ public class BotController {
 
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
 	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> map) throws JSONException {
-		System.out.println("**********webhook/***************");
+		System.out.println("**********webhook/***************" + map);
+		System.out.println("******************************");
+		for (Map.Entry<String, Object> entry : map.entrySet()) {
+			System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+		}
 		/*
 		 * JSONObject jsonResult = new JSONObject(map); JSONObject rsl =
 		 * jsonResult.getJSONObject("result"); JSONObject param =
