@@ -57,15 +57,17 @@ public class BotController {
 		for (Map.Entry<String, Object> entry : map.entrySet()) {
 			System.out.println(entry.getKey() + ":" + entry.getValue().toString());
 		}
-		/*
-		 * JSONObject jsonResult = new JSONObject(map); JSONObject rsl =
-		 * jsonResult.getJSONObject("result"); JSONObject param =
-		 * rsl.getJSONObject("parameters");
-		 */
+
+		JSONObject jsonResult = new JSONObject(map);
+		JSONObject rsl = jsonResult.getJSONObject("originalRequest");
+		JSONObject data = rsl.getJSONObject("data");
+		JSONObject source = data.getJSONObject("source");
+		JSONObject param = source.getJSONObject("userId");
+
 		// String city = param.getString("shipping-zone");
 
-		System.out.println("**********Result***************");
-		// System.out.println("********param**shipping-zone**************" + city);
+		System.out.println("**********Result****userId***********");
+		System.out.println("********param**shipping-zone**************" + param);
 		System.out.println("************* ******************");
 		Map<String, Object> json = new HashMap<String, Object>();
 		Product prodSearch = new Product();
