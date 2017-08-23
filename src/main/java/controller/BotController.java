@@ -1,4 +1,4 @@
-package com.example.controllers;
+package controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,17 +7,20 @@ import java.util.UUID;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import domain.Product;
+import repositories.ProductRepository;
+
 @RestController
-public class CustomerController {
+public class BotController {
+
+	@Autowired
+	ProductRepository rep;
 
 	@RequestMapping("/resource")
 	public Map<String, Object> home() {
@@ -27,35 +30,26 @@ public class CustomerController {
 		return model;
 	}
 
-	// @RequestMapping(value = "/webhook", method = RequestMethod.POST)
-	// private Map<String,Object> webhook(@RequestParam("shipping-zone") String
-	// shippingZone, @RequestParam("action") String action) throws JSONException {
-	//
-	//
-	//
-	// Map<String,Object> json = new HashMap<String,Object>();
-	//
-	// json.put("speech", " The cost of shipping to is 1000 euros.");
-	// json.put("displayText", " The cost of shipping to is 1000 euros.");
-	//
-	// json.put( "source", "apiai-onlinestore-shipping");
-	// System.out.println("*************
-	// "+shippingZone+"******************"+action);
-	// return json;
-	//
-	// }
-
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
-	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> obj) throws JSONException {
+	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> map) throws JSONException {
+		System.out.println("**********webhook/***************");
+		JSONObject jsonResult = new JSONObject(map);
+		JSONObject rsl = jsonResult.getJSONObject("result");
+		JSONObject param = rsl.getJSONObject("parameters");
+		String city = param.getString("shipping-zone");
 
+		System.out.println("**********Result***************");
+		System.out.println("********param**shipping-zone**************" + city);
+		System.out.println("************* ******************");
 		Map<String, Object> json = new HashMap<String, Object>();
-		System.out.println("************RequestBody*****************" + obj);
+		Product prodSearch = new Product();
+		prodSearch = rep.findOne(1);
 
-		String Speech = "The cost of shipping to  is  for " + obj.get("result");
 		/*
-		 * json.put("speech", " The cost of shipping to  is  1000 euros.");
-		 * json.put("displayText", " The cost of shipping to  is  1000 euros.");
-		 * json.put( "source", "apiai-onlinestore-shipping");
+		 * json.put("speech", " The cost of product is:" + prodSearch.getPrice());
+		 * json.put("displayText", " The cost of product is:" + prodSearch.getPrice());
+		 * 
+		 * json.put("source", "apiai-onlinestore-shipping");
 		 */
 		json.put("type", "image");
 		json.put("originalContentUrl",
@@ -63,7 +57,8 @@ public class CustomerController {
 		json.put("previewImageUrl",
 				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
 
-		System.out.println("************* ******************" + obj.get("result"));
+		System.out.println("************* ******************" + map.get("result"));
+
 		return json;
 
 	}
