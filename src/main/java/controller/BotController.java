@@ -49,26 +49,23 @@ public class BotController {
 			throws JSONException, IOException {
 		System.out.println("**********webhook/***************" + map);
 		System.out.println("******************************");
-		LineMessagingService client = LineMessagingServiceBuilder.create(
-				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
-				.build();
-		System.out.println("**client***" + client);
-		/*********************************************/
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-		}
 
 		JSONObject jsonResult = new JSONObject(map);
 		JSONObject rsl = jsonResult.getJSONObject("originalRequest");
 		JSONObject data = rsl.getJSONObject("data");
 		JSONObject source = data.getJSONObject("source");
-		JSONObject param = source.getJSONObject("userId");
+		String userId = source.getString("userId");
 
-		// String city = param.getString("shipping-zone");
-
-		System.out.println("**********Result****userId***********");
-		System.out.println("********param**shipping-zone**************" + param);
+		System.out.println("**********Result*************");
+		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
+		/********************************/
+		LineMessagingService client = LineMessagingServiceBuilder.create(
+				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
+				.build();
+		System.out.println("**client***" + client);
+		/*********************************************/
+		/****************************/
 		Map<String, Object> json = new HashMap<String, Object>();
 		Product prodSearch = new Product();
 		prodSearch = rep.findOne(1);
@@ -79,11 +76,6 @@ public class BotController {
 		 * 
 		 * json.put("source", "apiai-onlinestore-shipping");
 		 */
-		json.put("type", "image");
-		json.put("originalContentUrl",
-				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
-		json.put("previewImageUrl",
-				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
 
 		System.out.println("************* ******************" + map.get("result"));
 
