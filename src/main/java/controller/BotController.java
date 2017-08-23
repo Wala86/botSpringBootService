@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
+import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.message.ImageMessage;
 import com.linecorp.bot.model.message.TextMessage;
@@ -73,15 +74,17 @@ public class BotController {
 				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
 
 		System.out.println("************* ******************" + map.get("result"));
+
 		ImageMessage textMessage = new ImageMessage(
 				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
 				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
-		ReplyMessage replyMessage = new ReplyMessage("415707c0f42b4bc5a411bcc197789d5e", textMessage);
+
+		PushMessage pushMessage = new PushMessage("Ub682199b78467a3f13d9cfb217127857", textMessage);
+
 		Response<BotApiResponse> response = LineMessagingServiceBuilder.create(
 				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
-				.build().replyMessage(replyMessage).execute();
+				.build().pushMessage(pushMessage).execute();
 		System.out.println(response.code() + " " + response.message());
-		response.message();
 
 		return json;
 
