@@ -39,8 +39,7 @@ public class BotController {
 	}
 
 	@RequestMapping(value = "/webhook", method = RequestMethod.POST)
-	private @ResponseBody Map<String, Object> webhook(@RequestBody Map<String, Object> map)
-			throws JSONException, IOException {
+	private Response<BotApiResponse> webhook(@RequestBody Map<String, Object> map) throws JSONException, IOException {
 		System.out.println("**********webhook/***************" + map);
 		System.out.println("******************************");
 		for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -82,7 +81,7 @@ public class BotController {
 				.build().replyMessage(replyMessage).execute();
 		System.out.println(response.code() + " " + response.message());
 
-		return json;
+		return response;
 
 	}
 
