@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +20,15 @@ import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.action.MessageAction;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.ImageMessage;
 import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TemplateMessage;
 import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.message.template.CarouselColumn;
+import com.linecorp.bot.model.message.template.CarouselTemplate;
 import com.linecorp.bot.model.response.BotApiResponse;
 
 import domain.Product;
@@ -89,9 +94,38 @@ public class BotController {
 				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
 				.build().pushMessage(pushMessage).execute();
 		System.out.println(response.code() + " " + response.message());
+		/******************************************/
+		carouselForUser(
+				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
+				"Ub682199b78467a3f13d9cfb217127857", "title1",
+				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=");
+		/***********************************************/
 
 		return json;
 
+	}
+
+	// Method for send caraousel template message to user
+	private void carouselForUser(String poster_url, String userId, String title, String lChannelAccessToken) {
+		CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(
+				new CarouselColumn(poster_url, title, "Select one for more info",
+						Arrays.asList(new MessageAction("Full Data", "Title \"" + title + "\""),
+								new MessageAction("Summary", "Plot \"" + title + "\""),
+								new MessageAction("Poster", "Poster \"" + title + "\""))),
+				new CarouselColumn(poster_url, title, "Select one for more info",
+						Arrays.asList(new MessageAction("Released Date", "Released \"" + title + "\""),
+								new MessageAction("Actors", "Actors \"" + title + "\""),
+								new MessageAction("Awards", "Awards \"" + title + "\"")))));
+		TemplateMessage templateMessage = new TemplateMessage("Your search result", carouselTemplate);
+		PushMessage pushMessage = new PushMessage(userId, templateMessage);
+		try {
+			Response<BotApiResponse> response = LineMessagingServiceBuilder.create(lChannelAccessToken).build()
+					.pushMessage(pushMessage).execute();
+			System.out.println(response.code() + " " + response.message());
+		} catch (IOException e) {
+			System.out.println("Exception is raised ");
+			e.printStackTrace();
+		}
 	}
 
 }
