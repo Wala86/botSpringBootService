@@ -65,7 +65,7 @@ public class BotController {
 		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
 		/************************************/
-		JSONObject result = rsl.getJSONObject("result");
+		JSONObject result = jsonResult.getJSONObject("result");
 		JSONObject metadata = result.getJSONObject("metadata");
 		String intentName = metadata.getString("intentName");
 		System.out.println("********param***intentName**************" + intentName);
