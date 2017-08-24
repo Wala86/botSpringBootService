@@ -60,7 +60,6 @@ public class BotController {
 		JSONObject data = rsl.getJSONObject("data");
 		JSONObject source = data.getJSONObject("source");
 		String userId = source.getString("userId");
-
 		System.out.println("**********Result*************");
 		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
@@ -68,7 +67,35 @@ public class BotController {
 		JSONObject result = jsonResult.getJSONObject("result");
 		JSONObject metadata = result.getJSONObject("metadata");
 		String intentName = metadata.getString("intentName");
+		JSONObject parameters = result.getJSONObject("parameters");
+
+		String hairStyle = parameters.getString("hair-style");
+		String hairColor = parameters.getString("hair-color");
 		System.out.println("********param***intentName**************" + intentName);
+		/***********************************/
+		if (intentName == "recommendation") {
+			if (hairStyle != "" && hairColor != "") {
+				/*************** send Image ******************/
+				ImageMessage textMessage = new ImageMessage(
+						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
+						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
+
+				PushMessage pushMessage = new PushMessage("Ub682199b78467a3f13d9cfb217127857", textMessage);
+
+				Response<BotApiResponse> response = LineMessagingServiceBuilder.create(
+						"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
+						.build().pushMessage(pushMessage).execute();
+				System.out.println(response.code() + " " + response.message());
+				/*************** send carousel ******************/
+				carouselForUser("Ub682199b78467a3f13d9cfb217127857",
+						"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=",
+						"Mutsuko", "Orino",
+						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
+						"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTH27Sxx6jQ5IraidAQovMU1OTnQWL-hqfN0kiEF5JoRXVoQ8N-g");
+				/***********************************************/
+			}
+
+		}
 		/********************************/
 		LineMessagingService client = LineMessagingServiceBuilder.create(
 				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
@@ -89,29 +116,11 @@ public class BotController {
 
 		System.out.println("************* ******************" + map.get("result"));
 
-		ImageMessage textMessage = new ImageMessage(
-				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
-				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
-
-		PushMessage pushMessage = new PushMessage("Ub682199b78467a3f13d9cfb217127857", textMessage);
-
-		Response<BotApiResponse> response = LineMessagingServiceBuilder.create(
-				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
-				.build().pushMessage(pushMessage).execute();
-		System.out.println(response.code() + " " + response.message());
-		/******************************************/
-		carouselForUser("Ub682199b78467a3f13d9cfb217127857",
-				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=",
-				"Mutsuko", "Orino",
-				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTH27Sxx6jQ5IraidAQovMU1OTnQWL-hqfN0kiEF5JoRXVoQ8N-g");
-		/***********************************************/
-
 		return json;
 
 	}
 
-	// Method for send caraousel template message to user
+	// Method for send carousel template message to user
 	private void carouselForUser(String userId, String lChannelAccessToken, String nameSatff1, String nameSatff2,
 			String poster1_url, String poster2_url) {
 		CarouselTemplate carouselTemplate = new CarouselTemplate(
