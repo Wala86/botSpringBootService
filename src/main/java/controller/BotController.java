@@ -63,6 +63,7 @@ public class BotController {
 		String userId = source.getString("userId");
 		String userMessage = message.getString("text");
 		String timestamp = jsonResult.getString("timestamp");
+
 		System.out.println("**********Result*************");
 		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
@@ -71,12 +72,15 @@ public class BotController {
 		JSONObject metadata = result.getJSONObject("metadata");
 		String intentName = metadata.getString("intentName");
 		JSONObject parameters = result.getJSONObject("parameters");
+		JSONObject fulfillment = result.getJSONObject("fulfillment");
+		String speech = fulfillment.getString("speech");
 
 		String hairStyle = parameters.getString("hair-style");
 		String hairColor = parameters.getString("hair-color");
 		System.out.println("********param***intentName**************" + intentName);
 		System.out.println("********param***hairStyle**************" + hairStyle);
 		System.out.println("********param***hairColor**************" + hairColor);
+		System.out.println("********param***speech**************" + speech);
 		System.out.println("********param***userMessage**************" + userMessage);
 		System.out.println("********param***timestamp**************" + timestamp);
 		/***********************************/
