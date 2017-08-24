@@ -72,6 +72,8 @@ public class BotController {
 		String hairStyle = parameters.getString("hair-style");
 		String hairColor = parameters.getString("hair-color");
 		System.out.println("********param***intentName**************" + intentName);
+		System.out.println("********param***hairStyle**************" + hairStyle);
+		System.out.println("********param***hairColor**************" + hairColor);
 		/***********************************/
 		if (intentName == "recommendation") {
 			if (hairStyle != "" && hairColor != "") {
