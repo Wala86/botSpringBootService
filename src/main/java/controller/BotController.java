@@ -95,10 +95,11 @@ public class BotController {
 				.build().pushMessage(pushMessage).execute();
 		System.out.println(response.code() + " " + response.message());
 		/******************************************/
-		carouselForUser(
+		carouselForUser("Ub682199b78467a3f13d9cfb217127857",
+				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=",
+				"Mutsuko", "Orino",
 				"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
-				"Ub682199b78467a3f13d9cfb217127857", "title1",
-				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=");
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTH27Sxx6jQ5IraidAQovMU1OTnQWL-hqfN0kiEF5JoRXVoQ8N-g");
 		/***********************************************/
 
 		return json;
@@ -106,16 +107,19 @@ public class BotController {
 	}
 
 	// Method for send caraousel template message to user
-	private void carouselForUser(String poster_url, String userId, String title, String lChannelAccessToken) {
-		CarouselTemplate carouselTemplate = new CarouselTemplate(Arrays.asList(
-				new CarouselColumn(poster_url, title, "Select one for more info",
-						Arrays.asList(new MessageAction("Full Data", "Title \"" + title + "\""),
-								new MessageAction("Summary", "Plot \"" + title + "\""),
-								new MessageAction("Poster", "Poster \"" + title + "\""))),
-				new CarouselColumn(poster_url, title, "Select one for more info",
-						Arrays.asList(new MessageAction("Released Date", "Released \"" + title + "\""),
-								new MessageAction("Actors", "Actors \"" + title + "\""),
-								new MessageAction("Awards", "Awards \"" + title + "\"")))));
+	private void carouselForUser(String userId, String lChannelAccessToken, String nameSatff1, String nameSatff2,
+			String poster1_url, String poster2_url) {
+		CarouselTemplate carouselTemplate = new CarouselTemplate(
+				Arrays.asList(
+						new CarouselColumn(poster1_url, nameSatff1, "Select one for more info",
+								Arrays.asList(new MessageAction("Call", "Call \"" + nameSatff1 + "\""),
+										new MessageAction("Send email", "Send email \"" + nameSatff1 + "\""),
+										new MessageAction("Availability of",
+												"Availability of \"" + nameSatff1 + "\""))),
+						new CarouselColumn(poster2_url, nameSatff2, "Select one for more info", Arrays.asList(
+								new MessageAction("Call", "Call \"" + nameSatff2 + "\""),
+								new MessageAction("Send email", "Send email \"" + nameSatff2 + "\""),
+								new MessageAction("Availability of", "Availability of \"" + nameSatff2 + "\"")))));
 		TemplateMessage templateMessage = new TemplateMessage("Your search result", carouselTemplate);
 		PushMessage pushMessage = new PushMessage(userId, templateMessage);
 		try {
