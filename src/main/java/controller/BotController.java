@@ -59,7 +59,9 @@ public class BotController {
 		JSONObject rsl = jsonResult.getJSONObject("originalRequest");
 		JSONObject data = rsl.getJSONObject("data");
 		JSONObject source = data.getJSONObject("source");
+		JSONObject message = data.getJSONObject("message");
 		String userId = source.getString("userId");
+		String userMessage = source.getString("text");
 		System.out.println("**********Result*************");
 		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
@@ -74,6 +76,7 @@ public class BotController {
 		System.out.println("********param***intentName**************" + intentName);
 		System.out.println("********param***hairStyle**************" + hairStyle);
 		System.out.println("********param***hairColor**************" + hairColor);
+		System.out.println("********param***userMessage**************" + userMessage);
 		/***********************************/
 		if (intentName == "recommendation" || intentName.equals("recommendation")) {
 			System.out.println("***ok**recommendation***");
