@@ -64,6 +64,11 @@ public class BotController {
 		System.out.println("**********Result*************");
 		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
+		/************************************/
+		JSONObject result = rsl.getJSONObject("result");
+		JSONObject metadata = result.getJSONObject("metadata");
+		String intentName = metadata.getString("intentName");
+		System.out.println("********param***intentName**************" + intentName);
 		/********************************/
 		LineMessagingService client = LineMessagingServiceBuilder.create(
 				"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
