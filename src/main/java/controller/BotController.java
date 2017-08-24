@@ -80,8 +80,8 @@ public class BotController {
 		System.out.println("********param***intentName**************" + intentName);
 		System.out.println("********param***hairStyle**************" + hairStyle);
 		System.out.println("********param***hairColor**************" + hairColor);
-		System.out.println("********param***speech**************" + speech);
 		System.out.println("********param***userMessage**************" + userMessage);
+		System.out.println("********param***speech**************" + speech);
 		System.out.println("********param***timestamp**************" + timestamp);
 		/***********************************/
 		if (intentName == "recommendation" || intentName.equals("recommendation")) {
