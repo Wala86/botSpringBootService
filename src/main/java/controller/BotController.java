@@ -61,7 +61,7 @@ public class BotController {
 		JSONObject source = data.getJSONObject("source");
 		JSONObject message = data.getJSONObject("message");
 		String userId = source.getString("userId");
-		String userMessage = source.getString("text");
+		String userMessage = message.getString("text");
 		System.out.println("**********Result*************");
 		System.out.println("********param***userId**************" + userId);
 		System.out.println("************* ******************");
