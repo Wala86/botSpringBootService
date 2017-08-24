@@ -75,7 +75,7 @@ public class BotController {
 		System.out.println("********param***hairStyle**************" + hairStyle);
 		System.out.println("********param***hairColor**************" + hairColor);
 		/***********************************/
-		if (intentName == "recommendation") {
+		if (intentName == "recommendation" || intentName.equals("recommendation")) {
 			System.out.println("***ok**recommendation***");
 			if ((hairStyle != "") && (hairColor != "")) {
 				System.out.println("***ok**hairStyle and hairColor****");
