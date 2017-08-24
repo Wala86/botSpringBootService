@@ -81,9 +81,7 @@ public class BotController {
 		System.out.println("********param***timestamp**************" + timestamp);
 		/***********************************/
 		if (intentName == "recommendation" || intentName.equals("recommendation")) {
-			System.out.println("***ok**recommendation***");
 			if ((hairStyle != "") && (hairColor != "")) {
-				System.out.println("***ok**hairStyle and hairColor****");
 				/*************** send Image ******************/
 				ImageMessage textMessage = new ImageMessage(
 						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
