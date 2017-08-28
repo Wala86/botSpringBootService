@@ -96,14 +96,14 @@ public class BotController {
 						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
 						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
 
-				PushMessage pushMessage = new PushMessage("Ub682199b78467a3f13d9cfb217127857", textMessage);
+				PushMessage pushMessage = new PushMessage(userId, textMessage);
 
 				Response<BotApiResponse> response = LineMessagingServiceBuilder.create(
 						"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=")
 						.build().pushMessage(pushMessage).execute();
 				System.out.println(response.code() + " " + response.message());
 				/*************** send carousel ******************/
-				carouselForUser("Ub682199b78467a3f13d9cfb217127857",
+				carouselForUser(userId,
 						"mmud/Cez+bvYykKzBnemzXm6fAXOPg6s9SEYD52jcBdCeFM/sxyIJxQaz9xpC0i2fW73wibxwtkHH45DNy6f9M8wj5GYAYxNf4NOZo0kfI68PmQzlbqqCQrg4C89zAtSlpp6YtH8/EJGk5MWZUTtbQdB04t89/1O/w1cDnyilFU=",
 						"Mutsuko", "Orino",
 						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
