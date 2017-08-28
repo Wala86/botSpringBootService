@@ -87,6 +87,9 @@ public class BotController {
 		if (intentName == "recommendation" || intentName.equals("recommendation")) {
 			if ((hairStyle != "") && (hairColor != "")) {
 				/*************** send Image ******************/
+				
+				System.out.println("********yassine**************");
+
 				ImageMessage textMessage = new ImageMessage(
 						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg",
 						"https://i.pinimg.com/736x/96/a0/54/96a0544ab7b6fa7cbdddff9c5d8397be--japanese-hairstyles-korean-hairstyles.jpg");
